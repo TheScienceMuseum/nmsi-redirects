@@ -1,7 +1,4 @@
 from flask import Flask 
-from flask import request
-from flask import redirect
-
 import csv
 
 # example of old url
