@@ -16,12 +16,18 @@ try:
   reader = csv.reader(f)
   for row in reader:
     lookup[row[0]] = row[1]
+except OSError as err:
+    app.logger.debug("OS error: {0}".format(err))
+except ValueError:
+    app.logger.debug("Could not convert data")
+except:
+    app.logger.debug("Unexpected error:", sys.exc_info()[0])
+    raise
 finally:
     f.close()
 
 @app.route('/') 
 def index():
-  app.logger.info('redirecting to /');
   return redirect(courl);
 
 @app.route('/detail.php') 
@@ -29,9 +35,10 @@ def match():
   try:
     return redirect(courl + '/oid/' + lookup[request.args.get('kv')] + "?redirect=true")
   except KeyError:
+    app.logger.info("Could not find kv value")
     return redirect(courl)
 
 if __name__ == '__main__':
-  # app.debug = True
+  app.debug = True
   app.run()
 
