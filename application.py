@@ -41,6 +41,10 @@ def match():
     application.logger.info("Could not find kv value")
     return redirect(courl)
 
+@application.errorhandler(404)
+def not_found(error):
+  return redirect(courl)
+
 if __name__ == '__main__':
   # application.debug = True
   application.run()
