@@ -14,7 +14,7 @@ lookup = {}
 
 # load mapping table into a dictonary keyed on kv value
 app.logger.info('loading mappings');
-f = open('lookup.csv')
+f = open('lookup.csv', "r", encoding='latin-1')
 try:
   reader = csv.reader(f)
   for row in reader:
@@ -35,6 +35,6 @@ def match():
     return redirect(courl)
 
 if __name__ == '__main__':
-  # application.debug = True
-  application.run()
+  # app.debug = True
+  app.run()
 
