@@ -7,7 +7,7 @@ import csv
 # example of old url
 # http://collectionsonline.nmsi.ac.uk/detail.php?type=related&kv=66468&t=objects
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 courl = 'https://collection.sciencemuseum.org.uk'
 lookup = {}
@@ -42,6 +42,6 @@ def match():
     return redirect(courl)
 
 if __name__ == '__main__':
-  app.debug = True
-  app.run()
+  application.debug = True
+  application.run()
 
