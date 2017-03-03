@@ -32,15 +32,18 @@ finally:
 
 @application.route('/') 
 def index():
-  return redirect(courl);
+  return redirect(courl, code=301);
 
 @application.route('/detail.php') 
 def match():
-  try:
-    return redirect(courl + '/oid/' + urllib.parse.quote(lookup[request.args.get('kv')], safe='') + "?redirect=true")
-  except KeyError:
-    application.logger.info("Could not find kv value")
-    return redirect(courl)
+  if request.args.get('t') == 'people':
+    return redirect(courl + '/search/people', code=301)
+  else:
+    try:
+      return redirect(courl + '/oid/' + urllib.parse.quote(lookup[request.args.get('kv')], safe='') + "?redirect=true")
+    except KeyError:
+      application.logger.info("Could not find kv value")
+      return redirect(courl, code=301)
 
 @application.errorhandler(404)
 def not_found(error):
