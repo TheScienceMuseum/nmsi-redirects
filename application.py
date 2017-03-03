@@ -3,6 +3,7 @@ from flask import redirect
 from flask import request 
 
 import csv
+import urllib.parse
 
 # example of old url
 # http://collectionsonline.nmsi.ac.uk/detail.php?type=related&kv=66468&t=objects
@@ -36,7 +37,7 @@ def index():
 @application.route('/detail.php') 
 def match():
   try:
-    return redirect(courl + '/oid/' + lookup[request.args.get('kv')] + "?redirect=true")
+    return redirect(courl + '/oid/' + urllib.parse.quote(lookup[request.args.get('kv')], safe='') + "?redirect=true")
   except KeyError:
     application.logger.info("Could not find kv value")
     return redirect(courl)
