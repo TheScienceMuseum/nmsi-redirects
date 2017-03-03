@@ -47,7 +47,7 @@ def match():
 
 @application.errorhandler(404)
 def not_found(error):
-  return redirect(courl)
+  return redirect(courl, code=301)
 
 if __name__ == '__main__':
   # application.debug = True
