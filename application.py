@@ -2,6 +2,7 @@ from flask import Flask
 from flask import redirect 
 from flask import request 
 
+import logging
 import csv
 import urllib.parse
 
@@ -40,9 +41,10 @@ def match():
     return redirect(courl + '/search/people', code=301)
   else:
     try:
-      return redirect(courl + '/oid/' + urllib.parse.quote(lookup[request.args.get('kv')], safe='') + "?redirect=true")
+      kv = request.args.get('kv')
+      mid = lookup[kv]
+      return redirect(courl + '/oid/' + urllib.parse.quote(uid, safe='') + "?redirect=true")
     except KeyError:
-      application.logger.info("Could not find kv value")
       return redirect(courl, code=301)
 
 @application.errorhandler(404)
@@ -51,5 +53,6 @@ def not_found(error):
 
 if __name__ == '__main__':
   # application.debug = True
+  logging.basicConfig(level=logging.INFO)
   application.run()
 
