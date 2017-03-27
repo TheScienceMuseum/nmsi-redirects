@@ -36,7 +36,7 @@ def index():
   return redirect(courl, code=301);
 
 @application.route('/detail.php') 
-def match():
+def nmsi():
   if request.args.get('t') == 'people':
     return redirect(courl + '/search/people', code=301)
   else:
@@ -48,7 +48,7 @@ def match():
       return redirect(courl, code=301)
 
 @application.route('/htmlmn/collections/online/search.php') 
-def match():
+def emu():
   return redirect(courl + '/search/museum/museum%20of%20science%20and%20industry', code=301)
 
 @application.errorhandler(404)
