@@ -47,6 +47,10 @@ def match():
     except KeyError:
       return redirect(courl, code=301)
 
+@application.route('/htmlmn/collections/online/search.php') 
+def match():
+  return redirect(courl + '/search/museum/museum%20of%20science%20and%20industry', code=301)
+
 @application.errorhandler(404)
 def not_found(error):
   return redirect(courl, code=301)
