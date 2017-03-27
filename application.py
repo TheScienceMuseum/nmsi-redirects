@@ -42,8 +42,8 @@ def match():
   else:
     try:
       kv = request.args.get('kv')
-      mid = lookup[kv]
-      return redirect(courl + '/oid/' + urllib.parse.quote(uid, safe='') + "?redirect=true")
+      oid = lookup[kv]
+      return redirect(courl + '/oid/' + oid + "?redirect=true")
     except KeyError:
       return redirect(courl, code=301)
 
